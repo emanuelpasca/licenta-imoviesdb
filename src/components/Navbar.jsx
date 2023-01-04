@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <div className="navbar bg-secondary">
+    <div className="navbar bg-secondary sticky top-0 z-50">
       <div className="flex-1">
         <a className="btn btn-primary normal-case text-lg">iMOVIES</a>
       </div>
@@ -13,15 +13,15 @@ const Navbar = () => {
           />
         </div>
         <div>
-          <i class="fa-solid fa-heart"></i>
+          <i className="fa-solid fa-heart"></i>
           <button className="btn btn-secondary rounded-full">Favorites</button>
         </div>
         <div>
-          <i class="fa-solid fa-user"></i>
+          <i className="fa-solid fa-user"></i>
           <button className="btn btn-secondary rounded-full">Actors</button>
         </div>
         <div>
-          <i class="fa-solid fa-bookmark"></i>
+          <i className="fa-solid fa-bookmark"></i>
           <button className="btn btn-secondary rounded-full">Watchlist</button>
         </div>
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
