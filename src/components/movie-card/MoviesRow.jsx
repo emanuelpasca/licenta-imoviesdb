@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useFetchMovies from "../../configs/actions";
 import { RESULTS_PER_PAGE } from "../../configs/config";
 import MovieList from "./MovieList";
+import "./Movies.css";
 
 const MoviesRow = (props) => {
   const [movies, setMovies] = useState([]);
@@ -11,32 +12,38 @@ const MoviesRow = (props) => {
   const getMovies = useFetchMovies();
 
   useEffect(() => {
-    getMovies(`${props.description.replaceAll(" ", "")}`)
-      .then((movies) => {
-        if (movies.errorMessage) {
-          console.log(movies.errorMessage);
-          return;
-        }
+    if (props.withFetch) {
+      getMovies(`${props.description.replaceAll(" ", "")}`)
+        .then((movies) => {
+          if (movies.errorMessage) {
+            console.log(movies.errorMessage);
+            return;
+          }
 
-        setMovies(movies.items);
-        setDisplayedMovies(movies.items.slice(0, 10));
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+          setMovies(movies.items);
+          setDisplayedMovies(movies.items.slice(0, 10));
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setMovies(props.movies);
+      setDisplayedMovies(props.movies.slice(0, 6));
+      setLoading(false);
+    }
   }, []);
 
   const nextPageClickHandler = () => {
-    const start = page * RESULTS_PER_PAGE; //10;
-    const end = (page + 1) * RESULTS_PER_PAGE; //20;
+    const start = page * props.resultsPerPage; //10;
+    const end = (page + 1) * props.resultsPerPage; //20;
     setDisplayedMovies(movies.slice(start, end));
     setPage(page + 1);
   };
 
   const previousPageClickHandler = () => {
-    const start = (page - 2) * RESULTS_PER_PAGE; //0; 10-20 pagina 2
-    const end = (page - 1) * RESULTS_PER_PAGE; //9;
+    const start = (page - 2) * props.resultsPerPage; //0; 10-20 pagina 2
+    const end = (page - 1) * props.resultsPerPage; //9;
     setDisplayedMovies(movies.slice(start, end));
     setPage(page - 1);
   };
@@ -50,30 +57,34 @@ const MoviesRow = (props) => {
 
   return (
     <>
-      <div className="ml-10 flex justify-center">
+      <div className="flex justify-center">
         <div>
           <div className="p-1 flex text-xl">
             <div className="text-red-700">|</div>
-            <div className="mx-1">{props.description}</div>
+            <div className="mx-1 text-2xl">{props.description || ""}</div>
           </div>
-          <div className="flex">
-            {page > 1 && (
-              <button
-                className="btn btn-primary btn-square h-72"
-                onClick={previousPageClickHandler}
-              >
-                <i className="fa-solid fa-chevron-left"></i>
-              </button>
-            )}
-            <MovieList movies={displayedMovies}></MovieList>
-            {movies.length > 10 && (
-              <button
-                className="btn btn-primary btn-square h-72"
-                onClick={nextPageClickHandler}
-              >
-                <i className="fa-solid fa-chevron-right"></i>
-              </button>
-            )}
+          <div className="flex justify-center">
+            <div className="movie-container">
+              {page > 1 && (
+                <button
+                  className="btn btn-secondary btn-square btn-outline movie-button-left"
+                  onClick={previousPageClickHandler}
+                >
+                  <i className="fa-solid fa-chevron-left"></i>
+                </button>
+              )}
+              <MovieList movies={displayedMovies}></MovieList>
+              {movies.length > 10 &&
+                (page - 1) * props.resultsPerPage <
+                  movies.length - props.resultsPerPage && (
+                  <button
+                    className="btn btn-secondary btn-square btn-outline movie-button-right"
+                    onClick={nextPageClickHandler}
+                  >
+                    <i className="fa-solid fa-chevron-right"></i>
+                  </button>
+                )}
+            </div>
           </div>
         </div>
       </div>

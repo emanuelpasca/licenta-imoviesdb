@@ -10,16 +10,16 @@ import TitlePage from "./pages/title-page/TitlePage";
 function App() {
   return (
     <div className="app">
-      <Navbar></Navbar>
       <BrowserRouter>
+        <Navbar></Navbar>
         <Routes>
           <Route path={PagePaths.LANDING} element={<Landing />} />
         </Routes>
         <Routes>
           <Route path={PagePaths.TITLE_PAGE} element={<TitlePage />} />
         </Routes>
+        <Footer></Footer>
       </BrowserRouter>
-      <Footer></Footer>
     </div>
   );
 }

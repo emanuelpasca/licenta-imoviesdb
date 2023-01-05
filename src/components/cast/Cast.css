@@ -1,0 +1,19 @@
+.cast-container {
+  position: relative;
+  justify-content: center;
+}
+
+.cast-button-left {
+  position: absolute;
+  top: 40%;
+  left: 1%;
+  align-items: center;
+  z-index: 99;
+}
+
+.cast-button-right {
+  position: absolute;
+  top: 40%;
+  right: 5%;
+  align-items: center;
+}

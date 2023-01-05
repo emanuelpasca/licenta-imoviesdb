@@ -1,8 +1,14 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   return (
     <div className="navbar bg-secondary sticky top-0 z-50">
       <div className="flex-1">
-        <a className="btn btn-primary normal-case text-lg">iMOVIES</a>
+        <Link to={`/`}>
+          <button className="btn btn-primary normal-case text-lg">
+            iMOVIES
+          </button>
+        </Link>
       </div>
       <div className="flex-none gap-5">
         <div className="form-control">

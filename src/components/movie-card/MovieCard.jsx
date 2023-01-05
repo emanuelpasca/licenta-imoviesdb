@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 
 const MovieCard = (props) => {
   return (
-    <div className="p-2">
+    <div className="p-2 mt-2">
       <div className="card card-normal w-36 h-72 bg-secondary shadow-xl rounded-none">
         <Link to={`/title/${props.movie.id}`}>
           <figure>
-            <img className="h-25 w-36" src={props.movie.image} alt="Shoes" />
+            <img className="h-52 w-36" src={props.movie.image} alt="Shoes" />
           </figure>
         </Link>
         <div className="p-1">
