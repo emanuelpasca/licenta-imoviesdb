@@ -5,10 +5,10 @@ const Landing = () => {
   return (
     <div>
       <MoviesRow description={"Top 250 Movies"}></MoviesRow>
-      <MoviesRow description={"Top 250 TVs"}></MoviesRow>
+      {/* <MoviesRow description={"Top 250 TVs"}></MoviesRow>
       <MoviesRow description={"Most Popular Movies"}></MoviesRow>
       <MoviesRow description={"Most Popular TVs"}></MoviesRow>
-      <MoviesRow description={"Coming Soon"}></MoviesRow>
+      <MoviesRow description={"Coming Soon"}></MoviesRow> */}
     </div>
   );
 };
