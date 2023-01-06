@@ -28,7 +28,7 @@ const TitlePage = () => {
           .then((trailer) => setTrailer(trailer.linkEmbed));
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [id]);
 
   if (loading)
     return (
@@ -135,7 +135,7 @@ const TitlePage = () => {
             <hr className="color-red-500"></hr>
             <div className="mt-5 mb-5">
               <label className="text-red-700 mr-1 text-xl">|</label>
-              <label className="color-white text-xl">Directors </label>
+              <label className="color-white text-xl">Director</label>
               <label className="ml-5">{movie.directors}</label>
             </div>
             <hr className="color-red-500"></hr>

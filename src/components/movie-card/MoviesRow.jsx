@@ -32,7 +32,7 @@ const MoviesRow = (props) => {
       setDisplayedMovies(props.movies.slice(0, 6));
       setLoading(false);
     }
-  }, []);
+  }, [props.movies]);
 
   const nextPageClickHandler = () => {
     const start = page * props.resultsPerPage; //10;
