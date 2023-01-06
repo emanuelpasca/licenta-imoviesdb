@@ -13,7 +13,7 @@ const MovieCard = (props) => {
           <div className="flex justify-between">
             <div className="space-x-1">
               <i className="fa-solid fa-star text-red-500"></i>
-              <label>{props.movie.imDbRating}</label>
+              <label>{props.movie.imDbRating || ""}</label>
             </div>
             <div className="flex space-x-2">
               <div className="flex-initial cursor-pointer">

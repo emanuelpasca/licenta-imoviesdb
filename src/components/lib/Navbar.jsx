@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SearchBar from "./search-bar/SearchBar";
 
 const Navbar = () => {
   return (
@@ -12,11 +13,7 @@ const Navbar = () => {
       </div>
       <div className="flex-none gap-5">
         <div className="form-control">
-          <input
-            type="text"
-            placeholder="Search"
-            className="input input-xs bg-accent"
-          />
+          <SearchBar></SearchBar>
         </div>
         <div>
           <i className="fa-solid fa-heart"></i>

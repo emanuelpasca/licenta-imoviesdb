@@ -28,6 +28,7 @@ const TitlePage = () => {
           .then((trailer) => setTrailer(trailer.linkEmbed));
       })
       .catch((error) => console.log(error));
+    window.scrollTo(0, 0);
   }, [id]);
 
   if (loading)
