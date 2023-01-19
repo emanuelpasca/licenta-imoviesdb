@@ -9,6 +9,7 @@ const CastRow = (props) => {
 
   useEffect(() => {
     setDisplayedActors(props.cast.slice(0, 6));
+    setPage(1);
   }, [props.cast]);
 
   const nextPageClickHandler = () => {

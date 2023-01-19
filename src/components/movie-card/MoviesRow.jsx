@@ -29,9 +29,11 @@ const MoviesRow = (props) => {
         });
     } else {
       setMovies(props.movies);
-      setDisplayedMovies(props.movies.slice(0, 6));
+      setDisplayedMovies(props.movies.slice(0, props.resultsPerPage));
       setLoading(false);
     }
+
+    setPage(1);
   }, [props.movies]);
 
   const nextPageClickHandler = () => {
