@@ -13,9 +13,7 @@ function App() {
       <BrowserRouter>
         <Navbar></Navbar>
         <Routes>
-          <Route path={PagePaths.LANDING} element={<Landing />} />
-        </Routes>
-        <Routes>
+          <Route exact path={PagePaths.LANDING} element={<Landing />} />
           <Route path={PagePaths.TITLE_PAGE} element={<TitlePage />} />
         </Routes>
         <Footer></Footer>
