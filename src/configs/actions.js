@@ -2,9 +2,13 @@ import { API_KEY } from "./config";
 
 const useFetchMovies = () => {
   const AJAX = async (type) => {
-    const res = await fetch(`https://imdb-api.com/en/API/${type}/${API_KEY}`);
-    const data = res.json();
-    return data;
+    try {
+      const res = await fetch(`https://imdb-api.com/en/API/${type}/${API_KEY}`);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return AJAX;

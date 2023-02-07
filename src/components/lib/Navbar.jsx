@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import SearchBar from "./search-bar/SearchBar";
+import { PagePaths } from "../../pages/pages";
 
 const Navbar = () => {
   return (
@@ -27,11 +28,23 @@ const Navbar = () => {
           <i className="fa-solid fa-bookmark"></i>
           <button className="btn btn-secondary rounded-full">Watchlist</button>
         </div>
-        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-          <div className="w-10 rounded-full">
-            <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_124200.png&f=1&nofb=1&ipt=9039a08cab91286a0b12274e5af153cbbe3b307d64d685c019641b6a2bf43ef9&ipo=images" />
-          </div>
-        </label>
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_124200.png&f=1&nofb=1&ipt=9039a08cab91286a0b12274e5af153cbbe3b307d64d685c019641b6a2bf43ef9&ipo=images" />
+            </div>
+          </label>
+          <ul
+            tabIndex={0}
+            className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-secondary rounded-box w-52"
+          >
+            <li>
+              <Link to={PagePaths.LOGIN}>
+                <a className="">Login</a>
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

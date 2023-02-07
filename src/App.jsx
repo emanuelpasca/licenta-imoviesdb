@@ -3,6 +3,8 @@ import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/lib/Footer";
 import Navbar from "./components/lib/Navbar";
+import LoginPage from "./pages/auth/login-page/LoginPage";
+import RegisterPage from "./pages/auth/register-page/RegisterPage";
 import Landing from "./pages/landing-page/Landing";
 import { PagePaths } from "./pages/pages";
 import TitlePage from "./pages/title-page/TitlePage";
@@ -15,6 +17,8 @@ function App() {
         <Routes>
           <Route exact path={PagePaths.LANDING} element={<Landing />} />
           <Route path={PagePaths.TITLE_PAGE} element={<TitlePage />} />
+          <Route path={PagePaths.LOGIN} element={<LoginPage />} />
+          <Route path={PagePaths.REGISTER} element={<RegisterPage />} />
         </Routes>
         <Footer></Footer>
       </BrowserRouter>
