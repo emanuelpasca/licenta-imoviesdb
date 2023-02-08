@@ -1,6 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { whereQuery } from "../../../configs/firebase/actions";
+import { useUserAuth } from "../../../contexts/AuthContext";
+import useUserDetails from "../../../hooks/UserDetailsHook";
+import { PagePaths } from "../../pages";
 
 const LoginPage = () => {
+  const { user, logIn } = useUserAuth();
+  const { storeCurrentUserDetails } = useUserDetails();
+
+  if (user) {
+    return <Navigate to={PagePaths.LANDING} />;
+  }
+
+  const onSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+
+      const userCredentials = await logIn(email, password);
+      const usersQueryResults = await whereQuery(
+        "users",
+        "userId",
+        userCredentials.user.uid
+      );
+
+      storeCurrentUserDetails(usersQueryResults[0]);
+      navigate(PagePaths.LANDING);
+      notify("success", "Logged in succesfully!");
+    } catch (err) {
+      notify("error", `${err}`);
+    }
+  };
+
   return (
     <div className="my-24 flex flex-col items-center justify-center">
       <div>
@@ -27,10 +60,10 @@ const LoginPage = () => {
           </div>
 
           <div className="mt-10">
-            <form action="#">
+            <form onSubmit={onSubmit}>
               <div className="flex flex-col mb-5">
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="mb-1 text-xs tracking-wide text-accent"
                 >
                   E-Mail Address:
@@ -71,9 +104,9 @@ const LoginPage = () => {
                   />
                 </div>
               </div>
-              <div class="flex flex-col mb-6">
+              <div className="flex flex-col mb-6">
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="mb-1 text-xs sm:text-sm tracking-wide text-accent"
                 >
                   Password:
@@ -120,7 +153,7 @@ const LoginPage = () => {
               <div className="flex w-full">
                 <button
                   type="submit"
-                  class="
+                  className="
                   flex
                   mt-2
                   items-center
@@ -138,17 +171,9 @@ const LoginPage = () => {
                   ease-in
                 "
                 >
-                  <span class="mr-2 uppercase">Sign In</span>
+                  <span className="mr-2 uppercase">Sign In</span>
                   <span>
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24">
                       <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </span>
@@ -157,11 +182,9 @@ const LoginPage = () => {
             </form>
           </div>
         </div>
-        <div class="flex justify-center items-center mt-6">
-          <a
-            href="#"
-            target="_blank"
-            class="
+        <div className="flex justify-center items-center mt-6">
+          <div
+            className="
             inline-flex
             items-center
             text-accent
@@ -171,13 +194,13 @@ const LoginPage = () => {
           >
             <span className="ml-2">
               You don't have an account?
-              <Link to={"/register"}>
+              <Link to={PagePaths.REGISTER}>
                 <label className="text-xs ml-2 text-primary font-semibold cursor-pointer">
                   Register now
                 </label>
               </Link>
             </span>
-          </a>
+          </div>
         </div>
       </div>
     </div>

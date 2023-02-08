@@ -13,20 +13,16 @@ const MoviesRow = (props) => {
 
   useEffect(() => {
     if (props.withFetch) {
-      getMovies(`${props.description.replaceAll(" ", "")}`)
-        .then((movies) => {
-          if (movies.errorMessage) {
-            console.log(movies.errorMessage);
-            return;
-          }
+      getMovies(`${props.description.replaceAll(" ", "")}`).then((movies) => {
+        if (movies.errorMessage) {
+          console.error(movies.errorMessage);
+          return;
+        }
 
-          setMovies(movies.items);
-          setDisplayedMovies(movies.items.slice(0, 10));
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+        setMovies(movies.items);
+        setDisplayedMovies(movies.items.slice(0, 10));
+        setLoading(false);
+      });
     } else {
       setMovies(props.movies);
       setDisplayedMovies(props.movies.slice(0, props.resultsPerPage));

@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import MovieCard from "../../components/movie-card/MovieCard";
 import MoviesRow from "../../components/movie-card/MoviesRow";
+import { useUserAuth } from "../../contexts/AuthContext";
 
 const Landing = () => {
   return (

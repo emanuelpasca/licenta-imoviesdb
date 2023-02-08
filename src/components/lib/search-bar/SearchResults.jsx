@@ -12,6 +12,9 @@ const SearchResults = (props) => {
       .then((data) => {
         setResults(data.results);
         setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
       });
   }, [props.input]);
 

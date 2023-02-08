@@ -1,8 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SearchBar from "./search-bar/SearchBar";
 import { PagePaths } from "../../pages/pages";
+import { useUserAuth } from "../../contexts/AuthContext";
+import useToastify from "../../hooks/ToastHook";
 
 const Navbar = () => {
+  const { user, logOut } = useUserAuth();
+  const navigate = useNavigate();
+  const notify = useToastify();
+
+  const logOutHandler = async () => {
+    try {
+      await logOut();
+      navigate(PagePaths.LANDING);
+      notify("success", "Logged out succesfully");
+      localStorage.setItem("userData", "");
+      // window.location.reload();
+    } catch (err) {
+      notify("error", `${err}`);
+    }
+  };
+
   return (
     <div className="navbar bg-secondary sticky top-0 z-50">
       <div className="flex-1">
@@ -39,9 +57,13 @@ const Navbar = () => {
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-secondary rounded-box w-52"
           >
             <li>
-              <Link to={PagePaths.LOGIN}>
-                <a className="">Login</a>
-              </Link>
+              {!user ? (
+                <Link to={PagePaths.LOGIN}>
+                  <label className="">Login</label>
+                </Link>
+              ) : (
+                <label onClick={logOutHandler}>Logout</label>
+              )}
             </li>
           </ul>
         </div>

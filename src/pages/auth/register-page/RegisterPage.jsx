@@ -1,6 +1,41 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../../contexts/AuthContext";
+import useToastify from "../../../hooks/ToastHook";
+import { PagePaths } from "../../pages";
 
 const RegisterPage = () => {
+  const { signUp } = useUserAuth();
+  const notify = useToastify();
+  const navigate = useNavigate();
+  const { user } = useUserAuth();
+
+  const onSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const email = e.target.email.value;
+      const username = e.target.username.value;
+      const password = e.target.password.value;
+      const confirmPassword = e.target.confirmPassword.value;
+
+      await signUp(email, password, username);
+
+      if (password !== confirmPassword) {
+        notify("error", "Passwords do not match!");
+        return;
+      }
+
+      notify("success", "Register succesfully");
+      navigate(PagePaths.LOGIN);
+    } catch (err) {
+      notify("error", `${err}`);
+    }
+  };
+
+  if (user) {
+    return <Navigate to={PagePaths.LANDING} />;
+  }
+
   return (
     <div className="my-10 flex flex-col items-center justify-center">
       <div>
@@ -27,11 +62,11 @@ const RegisterPage = () => {
           </div>
 
           <div className="mt-10">
-            <form action="#">
+            <form onSubmit={onSubmit}>
               {/* USERNAME */}
               <div className="flex flex-col mb-5">
                 <label
-                  for="username"
+                  htmlFor="username"
                   className="mb-1 text-xs tracking-wide text-accent"
                 >
                   Username:
@@ -54,7 +89,7 @@ const RegisterPage = () => {
                   </div>
 
                   <input
-                    id="email"
+                    id="username"
                     type="text"
                     name="username"
                     className="
@@ -76,7 +111,7 @@ const RegisterPage = () => {
               {/* EMAIL */}
               <div className="flex flex-col mb-5">
                 <label
-                  for="email"
+                  htmlFor="email"
                   className="mb-1 text-xs tracking-wide text-accent"
                 >
                   E-Mail Address:
@@ -119,9 +154,9 @@ const RegisterPage = () => {
               </div>
 
               {/* PASSWORD */}
-              <div class="flex flex-col mb-6">
+              <div className="flex flex-col mb-6">
                 <label
-                  for="password"
+                  htmlFor="password"
                   className="mb-1 text-xs sm:text-sm tracking-wide text-accent"
                 >
                   Password:
@@ -166,9 +201,9 @@ const RegisterPage = () => {
               </div>
 
               {/* CONFIRM PASSWORD */}
-              <div class="flex flex-col mb-6">
+              <div className="flex flex-col mb-6">
                 <label
-                  for="confirmPassword"
+                  htmlFor="confirmPassword"
                   className="mb-1 text-xs sm:text-sm tracking-wide text-accent"
                 >
                   Confirm password:
@@ -215,7 +250,7 @@ const RegisterPage = () => {
               <div className="flex w-full">
                 <button
                   type="submit"
-                  class="
+                  className="
                   flex
                   mt-2
                   items-center
@@ -233,17 +268,9 @@ const RegisterPage = () => {
                   ease-in
                 "
                 >
-                  <span class="mr-2 uppercase">Register</span>
+                  <span className="mr-2 uppercase">Register</span>
                   <span>
-                    <svg
-                      class="h-6 w-6"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24">
                       <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </span>
@@ -252,11 +279,9 @@ const RegisterPage = () => {
             </form>
           </div>
         </div>
-        <div class="flex justify-center items-center mt-6">
-          <a
-            href="#"
-            target="_blank"
-            class="
+        <div className="flex justify-center items-center mt-6">
+          <div
+            className="
             inline-flex
             items-center
             text-accent
@@ -264,15 +289,15 @@ const RegisterPage = () => {
             text-xs text-center
           "
           >
-            <span class="ml-2">
+            <span className="ml-2">
               Already have an account?
-              <Link to={"/login"}>
+              <Link to={PagePaths.LOGIN}>
                 <label className="text-xs ml-2 text-primary font-semibold cursor-pointer">
                   Login now
                 </label>
               </Link>
             </span>
-          </a>
+          </div>
         </div>
       </div>
     </div>
