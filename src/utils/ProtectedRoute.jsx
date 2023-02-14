@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Navigate } from "react-router-dom";
 import { useUserAuth } from "../contexts/AuthContext";
 import useUserDetails from "../hooks/UserDetailsHook";
-import { PagesPaths } from "../pages/types";
+import { PagePaths } from "../pages/pages";
 
 const ProtectedRoute = ({ children }) => {
   const { getCurrentUserDetails } = useUserDetails();
@@ -15,7 +15,7 @@ const ProtectedRoute = ({ children }) => {
   if (Object.keys(userAuthData).length > 0 && userDetails)
     return <Fragment>{children}</Fragment>;
 
-  return <Navigate to={PagesPaths.LANDING}></Navigate>;
+  return <Navigate to={PagePaths.LANDING}></Navigate>;
 };
 
 export default ProtectedRoute;

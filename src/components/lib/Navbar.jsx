@@ -13,7 +13,7 @@ const Navbar = () => {
     try {
       await logOut();
       navigate(PagePaths.LANDING);
-      notify("success", "Logged out succesfully");
+      notify("success", "Logged out successfully");
       localStorage.setItem("userData", "");
       // window.location.reload();
     } catch (err) {

@@ -1,12 +1,15 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { whereQuery } from "../../../configs/firebase/actions";
 import { useUserAuth } from "../../../contexts/AuthContext";
+import useToastify from "../../../hooks/ToastHook";
 import useUserDetails from "../../../hooks/UserDetailsHook";
 import { PagePaths } from "../../pages";
 
 const LoginPage = () => {
   const { user, logIn } = useUserAuth();
   const { storeCurrentUserDetails } = useUserDetails();
+  const notify = useToastify();
+  const navigate = useNavigate();
 
   if (user) {
     return <Navigate to={PagePaths.LANDING} />;
