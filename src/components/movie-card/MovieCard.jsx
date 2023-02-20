@@ -20,7 +20,7 @@ const MovieCard = (props) => {
                 <i className="fa-regular fa-bookmark"></i>
               </div>
               <div className="flex-initial cursor-pointer">
-                <i className="fa-regular fa-heart"></i>
+                <i className="fa-solid fa-heart"></i>
               </div>
             </div>
           </div>
@@ -32,9 +32,11 @@ const MovieCard = (props) => {
               <i className="fa-solid fa-play"></i>
               <label className="text-xs cursor-pointer">Play trailer</label>
             </div>
-            <div className="cursor-pointer">
-              <i className="fa-solid fa-circle-info"></i>
-            </div>
+            <Link to={`/title/${props.movie.id}`}>
+              <div className="cursor-pointer">
+                <i className="fa-solid fa-circle-info"></i>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

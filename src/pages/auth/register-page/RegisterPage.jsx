@@ -9,6 +9,10 @@ const RegisterPage = () => {
   const navigate = useNavigate();
   const { user } = useUserAuth();
 
+  if (user) {
+    return <Navigate to={PagePaths.LANDING} />;
+  }
+
   const onSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -31,10 +35,6 @@ const RegisterPage = () => {
       notify("error", `${err}`);
     }
   };
-
-  if (user) {
-    return <Navigate to={PagePaths.LANDING} />;
-  }
 
   return (
     <div className="my-10 flex flex-col items-center justify-center">

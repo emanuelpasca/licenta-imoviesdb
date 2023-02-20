@@ -8,7 +8,7 @@ const Landing = () => {
         withFetch={true}
         description={"Top 250 Movies"}
       ></MoviesRow>
-      <MoviesRow
+      {/* <MoviesRow
         resultsPerPage={10}
         withFetch={true}
         description={"Top 250 TVs"}
@@ -27,7 +27,7 @@ const Landing = () => {
         resultsPerPage={10}
         withFetch={true}
         description={"Coming Soon"}
-      ></MoviesRow>
+      ></MoviesRow> */}
     </div>
   );
 };
