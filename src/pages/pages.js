@@ -3,5 +3,5 @@ export const PagePaths = {
   TITLE_PAGE: "/title/:id",
   LOGIN: "/login",
   REGISTER: "/register",
-  FAVORITES: "/favorites/user/:id",
+  FAVORITES: "/favorites",
 };

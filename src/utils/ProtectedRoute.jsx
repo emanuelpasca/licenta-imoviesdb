@@ -9,13 +9,11 @@ const ProtectedRoute = ({ children }) => {
   const { user: userAuthData } = useUserAuth();
   const userDetails = getCurrentUserDetails();
 
-  if (Object.keys(userAuthData).length > 0 && !userDetails)
-    return <div>Loading...</div>;
+  if (userAuthData && !userDetails) return <div>Loading...</div>;
 
-  if (Object.keys(userAuthData).length > 0 && userDetails)
-    return <Fragment>{children}</Fragment>;
+  if (userAuthData && userDetails) return <Fragment>{children}</Fragment>;
 
-  return <Navigate to={PagePaths.LANDING}></Navigate>;
+  return <Navigate to={PagePaths.LOGIN}></Navigate>;
 };
 
 export default ProtectedRoute;

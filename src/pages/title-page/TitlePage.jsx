@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import CastRow from "../../components/cast/CastRow";
 import MoviesRow from "../../components/movie-card/MoviesRow";
+import { useUserAuth } from "../../contexts/AuthContext";
+import useUserDetails from "../../hooks/UserDetailsHook";
+import { add, remove, whereQuery } from "../../configs/firebase/actions";
+import { PagePaths } from "../pages";
+import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 
 const TitlePage = () => {
   const [loading, setLoading] = useState(true);
@@ -11,9 +16,15 @@ const TitlePage = () => {
   const [genreList, setGenreList] = useState([]);
   const [actorList, setActorList] = useState([]);
   const [similars, setSimilars] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { userFavorites, setUserFavorites } = useUserFavorites();
+  const { user } = useUserAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!id) return;
+    setIsFavorite(false);
+
     fetch(`https://imdb-api.com/en/API/Title/k_435ffk04/${id}`)
       .then((res) => res.json())
       .then((movie) => {
@@ -23,6 +34,13 @@ const TitlePage = () => {
         setSimilars(movie.similars);
         setLoading(false);
 
+        // CHECK IF TITLE IS FAVORITE
+        userFavorites.forEach((favorite) => {
+          if (favorite.title.id === movie.id) {
+            setIsFavorite(true);
+          }
+        });
+
         fetch(`https://imdb-api.com/API/Trailer/k_435ffk04/${id}`)
           .then((res) => res.json())
           .then((trailer) => setTrailer(trailer.linkEmbed));
@@ -30,6 +48,63 @@ const TitlePage = () => {
       .catch((error) => console.log(error));
     window.scrollTo(0, 0);
   }, [id]);
+
+  // ADD TO FAVORITES HANDLER
+  const addToFavorites = () => {
+    if (!user) {
+      return navigate(PagePaths.LOGIN);
+    }
+    const { getCurrentUserDetails } = useUserDetails();
+    const { userId } = getCurrentUserDetails();
+
+    if (!isFavorite) {
+      add("favorites", {
+        userId: userId,
+        title: {
+          id: movie.id,
+          image: movie.image,
+          imDbRating: movie.imDbRating,
+          title: movie.title,
+          genreList: movie.genres,
+          keywords: movie.keywords,
+          plot: movie.plot,
+        },
+      });
+
+      setIsFavorite(true);
+
+      // UPDATE USER FAVORITES ARR
+      setUserFavorites((prev) => [
+        ...prev,
+        {
+          userId: userId,
+          title: {
+            id: movie.id,
+            image: movie.image,
+            imDbRating: movie.imDbRating,
+            title: movie.title,
+            genreList: movie.genres,
+            keywords: movie.keywords,
+            plot: movie.plot,
+          },
+        },
+      ]);
+    } else {
+      whereQuery("favorites", "title.id", movie.id).then((result) => {
+        const [title] = result;
+        // console.log(title);
+        remove("favorites", title.id).then(() => {
+          setIsFavorite(false);
+          setUserFavorites((prev) => {
+            const newFavorites = prev.filter(
+              (item) => item.title.id != movie.id
+            );
+            return newFavorites;
+          });
+        });
+      });
+    }
+  };
 
   if (loading)
     return (
@@ -124,9 +199,18 @@ const TitlePage = () => {
                 ))}
               </div>
               <div>
-                <button className="btn btn-secondary basis-2/6">
-                  <i className="fa-solid fa-bookmark"></i>
-                  <label className="ml-3">Add to watchlist</label>
+                <button
+                  className="btn btn-secondary basis-2/6"
+                  onClick={addToFavorites}
+                >
+                  <i
+                    className={
+                      isFavorite
+                        ? "fa-solid fa-heart text-red-500"
+                        : "fa-solid fa-heart "
+                    }
+                  ></i>
+                  <label className="ml-3">Add to favorites</label>
                 </button>
               </div>
             </div>

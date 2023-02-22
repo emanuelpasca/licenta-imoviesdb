@@ -11,22 +11,35 @@ import { PagePaths } from "./pages/pages";
 import TitlePage from "./pages/title-page/TitlePage";
 import "react-toastify/dist/ReactToastify.css";
 import { UserAuthContextProvider } from "./contexts/AuthContext";
+import { UserFavoritesContextProvider } from "./contexts/UserFavoritesContext";
+import FavoritesPage from "./pages/favorites-page/FavoritesPage";
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
     <div className="app">
       <UserAuthContextProvider>
-        <BrowserRouter>
-          <ToastContainer />
-          <Navbar></Navbar>
-          <Routes>
-            <Route exact path={PagePaths.LANDING} element={<Landing />} />
-            <Route path={PagePaths.TITLE_PAGE} element={<TitlePage />} />
-            <Route path={PagePaths.LOGIN} element={<LoginPage />} />
-            <Route path={PagePaths.REGISTER} element={<RegisterPage />} />
-          </Routes>
-          <Footer></Footer>
-        </BrowserRouter>
+        <UserFavoritesContextProvider>
+          <BrowserRouter>
+            <ToastContainer />
+            <Navbar></Navbar>
+            <Routes>
+              <Route exact path={PagePaths.LANDING} element={<Landing />} />
+              <Route path={PagePaths.TITLE_PAGE} element={<TitlePage />} />
+              <Route path={PagePaths.LOGIN} element={<LoginPage />} />
+              <Route path={PagePaths.REGISTER} element={<RegisterPage />} />
+              <Route
+                path={PagePaths.FAVORITES}
+                element={
+                  <ProtectedRoute>
+                    <FavoritesPage />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+            <Footer></Footer>
+          </BrowserRouter>
+        </UserFavoritesContextProvider>
       </UserAuthContextProvider>
     </div>
   );

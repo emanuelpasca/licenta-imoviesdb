@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
 import MoviesRow from "../../components/movie-card/MoviesRow";
+import { useUserAuth } from "../../contexts/AuthContext";
+import { useUserFavorites } from "../../contexts/UserFavoritesContext";
+import useUserDetails from "../../hooks/UserDetailsHook";
 
 const Landing = () => {
   return (

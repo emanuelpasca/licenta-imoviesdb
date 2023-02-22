@@ -12,10 +12,10 @@ const Navbar = () => {
   const logOutHandler = async () => {
     try {
       await logOut();
-      navigate(PagePaths.LANDING);
       notify("success", "Logged out successfully");
       localStorage.setItem("userData", "");
-      // window.location.reload();
+      navigate(PagePaths.LANDING);
+      window.location.reload();
     } catch (err) {
       notify("error", `${err}`);
     }
@@ -36,7 +36,11 @@ const Navbar = () => {
         </div>
         <div>
           <i className="fa-solid fa-heart"></i>
-          <button className="btn btn-secondary rounded-full">Favorites</button>
+          <Link to={PagePaths.FAVORITES}>
+            <button className="btn btn-secondary rounded-full">
+              Favorites
+            </button>
+          </Link>
         </div>
         <div>
           <i className="fa-solid fa-user"></i>
