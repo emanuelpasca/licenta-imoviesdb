@@ -26,6 +26,13 @@ const FavoritesPage = () => {
       </div>
     );
 
+  if (userFavorites.length === 0)
+    return (
+      <div className="flex justify-center">
+        <div className="mx-1 text-2xl">You have no favorites yet.</div>
+      </div>
+    );
+
   return (
     <div className="flex justify-center">
       <div>

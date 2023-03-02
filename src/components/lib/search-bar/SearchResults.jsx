@@ -5,6 +5,7 @@ import MovieCard from "../../movie-card/MovieCard";
 const SearchResults = (props) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { userInput, setUserInput } = props.userInputState;
 
   useEffect(() => {
     fetch(`https://imdb-api.com/en/API/SearchTitle/${API_KEY}/${props.input}`)
@@ -17,6 +18,12 @@ const SearchResults = (props) => {
         console.error(error);
       });
   }, [props.input]);
+
+  const onClickHandler = () => {
+    if (userInput) {
+      setUserInput("");
+    }
+  };
 
   if (loading)
     return (
@@ -32,7 +39,11 @@ const SearchResults = (props) => {
   return (
     <div className="mt-10 h-screen w-64 right-96 bg-secondary overflow-y-scroll absolute">
       {results.map((movie) => {
-        return <MovieCard movie={movie}></MovieCard>;
+        return (
+          <div onClick={onClickHandler}>
+            <MovieCard key={movie.id} movie={movie}></MovieCard>
+          </div>
+        );
       })}
     </div>
   );

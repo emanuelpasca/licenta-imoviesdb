@@ -20,7 +20,12 @@ const SearchBar = () => {
         placeholder="Search"
         className="input input-xs bg-accent"
       />
-      {userInput != "" && <SearchResults input={userInput}></SearchResults>}
+      {userInput != "" && (
+        <SearchResults
+          input={userInput}
+          userInputState={{ userInput, setUserInput }}
+        ></SearchResults>
+      )}
     </>
   );
 };

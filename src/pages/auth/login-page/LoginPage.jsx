@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { whereQuery } from "../../../configs/firebase/actions";
 import { useUserAuth } from "../../../contexts/AuthContext";
@@ -8,6 +9,7 @@ import { PagePaths } from "../../pages";
 const LoginPage = () => {
   const { user, logIn } = useUserAuth();
   const { storeCurrentUserDetails } = useUserDetails();
+
   const notify = useToastify();
   const navigate = useNavigate();
 

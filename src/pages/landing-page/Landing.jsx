@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MoviesRow from "../../components/movie-card/MoviesRow";
 import { useUserAuth } from "../../contexts/AuthContext";
-import { useUserFavorites } from "../../contexts/UserFavoritesContext";
-import useUserDetails from "../../hooks/UserDetailsHook";
 
 const Landing = () => {
   return (
@@ -12,7 +10,7 @@ const Landing = () => {
         withFetch={true}
         description={"Top 250 Movies"}
       ></MoviesRow>
-      {/* <MoviesRow
+      <MoviesRow
         resultsPerPage={10}
         withFetch={true}
         description={"Top 250 TVs"}
@@ -31,7 +29,7 @@ const Landing = () => {
         resultsPerPage={10}
         withFetch={true}
         description={"Coming Soon"}
-      ></MoviesRow> */}
+      ></MoviesRow>
     </div>
   );
 };

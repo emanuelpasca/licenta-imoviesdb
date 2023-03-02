@@ -1,6 +1,7 @@
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../../contexts/AuthContext";
 import useToastify from "../../../hooks/ToastHook";
+import useUserDetails from "../../../hooks/UserDetailsHook";
 import { PagePaths } from "../../pages";
 
 const RegisterPage = () => {
@@ -22,12 +23,12 @@ const RegisterPage = () => {
       const password = e.target.password.value;
       const confirmPassword = e.target.confirmPassword.value;
 
-      await signUp(email, password, username);
-
       if (password !== confirmPassword) {
         notify("error", "Passwords do not match!");
         return;
       }
+
+      await signUp(email, password, username);
 
       notify("success", "Register succesfully");
       navigate(PagePaths.LOGIN);
