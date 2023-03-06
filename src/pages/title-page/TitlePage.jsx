@@ -54,12 +54,10 @@ const TitlePage = () => {
     if (!user) {
       return navigate(PagePaths.LOGIN);
     }
-    const { getCurrentUserDetails } = useUserDetails();
-    const { userId } = getCurrentUserDetails();
 
     if (!isFavorite) {
       add("favorites", {
-        userId: userId,
+        userId: user.uid,
         title: {
           id: movie.id,
           image: movie.image,
@@ -77,7 +75,7 @@ const TitlePage = () => {
       setUserFavorites((prev) => [
         ...prev,
         {
-          userId: userId,
+          userId: user.uid,
           title: {
             id: movie.id,
             image: movie.image,
@@ -92,7 +90,6 @@ const TitlePage = () => {
     } else {
       whereQuery("favorites", "title.id", movie.id).then((result) => {
         const [title] = result;
-        // console.log(title);
         remove("favorites", title.id).then(() => {
           setIsFavorite(false);
           setUserFavorites((prev) => {

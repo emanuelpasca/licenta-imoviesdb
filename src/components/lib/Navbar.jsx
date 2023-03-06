@@ -15,7 +15,7 @@ const Navbar = () => {
       notify("success", "Logged out successfully");
       localStorage.setItem("userData", "");
       navigate(PagePaths.LANDING);
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       notify("error", `${err}`);
     }

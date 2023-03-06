@@ -9,9 +9,9 @@ const ProtectedRoute = ({ children }) => {
   const { user: userAuthData } = useUserAuth();
   const userDetails = getCurrentUserDetails();
 
-  if (userAuthData && !userDetails) return <div>Loading...</div>;
+  // if (userAuthData) return <div>Loading...</div>;
 
-  if (userAuthData && userDetails) return <Fragment>{children}</Fragment>;
+  if (userAuthData) return <Fragment>{children}</Fragment>;
 
   return <Navigate to={PagePaths.LOGIN}></Navigate>;
 };

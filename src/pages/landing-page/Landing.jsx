@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import MoviesRow from "../../components/movie-card/MoviesRow";
 import { useUserAuth } from "../../contexts/AuthContext";
+import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 
 const Landing = () => {
   return (
-    <div>
+    <div className="">
       <MoviesRow
         resultsPerPage={10}
         withFetch={true}
@@ -25,11 +26,11 @@ const Landing = () => {
         withFetch={true}
         description={"Most Popular TVs"}
       ></MoviesRow>
-      <MoviesRow
+      {/* <MoviesRow
         resultsPerPage={10}
         withFetch={true}
         description={"Coming Soon"}
-      ></MoviesRow>
+      ></MoviesRow> */}
     </div>
   );
 };

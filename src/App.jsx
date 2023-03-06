@@ -21,7 +21,7 @@ function App() {
       <UserAuthContextProvider>
         <UserFavoritesContextProvider>
           <BrowserRouter>
-            <ToastContainer />
+            <ToastContainer theme="dark" />
             <Navbar></Navbar>
             <Routes>
               <Route exact path={PagePaths.LANDING} element={<Landing />} />

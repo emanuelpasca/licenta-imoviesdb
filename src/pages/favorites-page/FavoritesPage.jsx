@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../../components/movie-card/MovieCard";
 import { whereQuery } from "../../configs/firebase/actions";
+import { useUserAuth } from "../../contexts/AuthContext";
 import useUserDetails from "../../hooks/UserDetailsHook";
 
 const FavoritesPage = () => {
-  const { getCurrentUserDetails } = useUserDetails();
-  const { userId } = getCurrentUserDetails();
+  const { user } = useUserAuth();
   const [userFavorites, setUserFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!userId) return;
-    whereQuery("favorites", "userId", userId).then((data) => {
+    if (!user.uid) return;
+    whereQuery("favorites", "userId", user.uid).then((data) => {
       if (!data) return;
 
       setUserFavorites(data);
