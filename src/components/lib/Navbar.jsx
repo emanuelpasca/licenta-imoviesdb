@@ -25,8 +25,8 @@ const Navbar = () => {
     <div className="navbar bg-secondary sticky top-0 z-50">
       <div className="flex-1">
         <Link to={`/`}>
-          <button className="btn btn-primary normal-case text-lg font-mono">
-            iMOVIES
+          <button className="btn btn-primary normal-case text-lg text-black font-mono">
+            IMOVIESdb
           </button>
         </Link>
       </div>

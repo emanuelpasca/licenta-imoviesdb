@@ -15,16 +15,16 @@ const Landing = () => {
           src="https://images.unsplash.com/photo-1458053688450-eef5d21d43b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80"
         ></img>
       </div>
-      <MoviesRow
+      {/* <MoviesRow
         resultsPerPage={10}
         withFetch={true}
         description={"Top 250 Movies"}
-      ></MoviesRow>
+      ></MoviesRow> */}
       {/* <MoviesRow
         resultsPerPage={10}
         withFetch={true}
         description={"Top 250 TVs"}
-      ></MoviesRow>
+      ></MoviesRow> */}
       <MoviesRow
         resultsPerPage={10}
         withFetch={true}
@@ -34,7 +34,7 @@ const Landing = () => {
         resultsPerPage={10}
         withFetch={true}
         description={"Most Popular TVs"}
-      ></MoviesRow> */}
+      ></MoviesRow>
       {/* <MoviesRow
         resultsPerPage={10}
         withFetch={true}
