@@ -25,7 +25,7 @@ const Navbar = () => {
     <div className="navbar bg-secondary sticky top-0 z-50">
       <div className="flex-1">
         <Link to={`/`}>
-          <button className="btn btn-primary normal-case text-lg">
+          <button className="btn btn-primary normal-case text-lg font-mono">
             iMOVIES
           </button>
         </Link>
@@ -37,18 +37,22 @@ const Navbar = () => {
         <div>
           <i className="fa-solid fa-heart"></i>
           <Link to={PagePaths.FAVORITES}>
-            <button className="btn btn-secondary rounded-full">
+            <button className="btn btn-secondary rounded-full font-mono">
               Favorites
             </button>
           </Link>
         </div>
         <div>
           <i className="fa-solid fa-user"></i>
-          <button className="btn btn-secondary rounded-full">Actors</button>
+          <button className="btn btn-secondary rounded-full font-mono">
+            Actors
+          </button>
         </div>
         <div>
           <i className="fa-solid fa-bookmark"></i>
-          <button className="btn btn-secondary rounded-full">Watchlist</button>
+          <button className="btn btn-secondary rounded-full font-mono">
+            Watchlist
+          </button>
         </div>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -63,7 +67,7 @@ const Navbar = () => {
             <li>
               {!user ? (
                 <Link to={PagePaths.LOGIN}>
-                  <label className="">Login</label>
+                  <label className="font-mono">Login</label>
                 </Link>
               ) : (
                 <label onClick={logOutHandler}>Logout</label>

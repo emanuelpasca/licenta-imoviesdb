@@ -59,7 +59,9 @@ const MoviesRow = (props) => {
         <div>
           <div className="p-1 flex text-xl">
             <div className="text-red-700">|</div>
-            <div className="mx-1 text-2xl">{props.description || ""}</div>
+            <div className="mx-1 text-2xl font-mono">
+              {props.description || ""}
+            </div>
           </div>
           <div className="flex justify-center">
             <div className="movie-container">

@@ -38,7 +38,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="my-10 flex flex-col items-center justify-center">
+    <div className="my-10 flex flex-col items-center justify-center font-mono">
       <div>
         <div
           className="

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { whereQuery } from "../../../configs/firebase/actions";
 import { useUserAuth } from "../../../contexts/AuthContext";
@@ -12,10 +11,6 @@ const LoginPage = () => {
 
   const notify = useToastify();
   const navigate = useNavigate();
-
-  if (user) {
-    return <Navigate to={PagePaths.LANDING} />;
-  }
 
   const onSubmit = async (e) => {
     try {
@@ -32,15 +27,18 @@ const LoginPage = () => {
       );
 
       storeCurrentUserDetails(usersQueryResults[0]);
-      navigate(PagePaths.LANDING);
       notify("success", "Logged in succesfully!");
+
+      // setTimeout(() => {
+      navigate(PagePaths.LANDING);
+      // }, 500);
     } catch (err) {
       notify("error", `${err}`);
     }
   };
 
   return (
-    <div className="my-24 flex flex-col items-center justify-center">
+    <div className="my-24 flex flex-col items-center justify-center font-mono">
       <div>
         <div
           className="

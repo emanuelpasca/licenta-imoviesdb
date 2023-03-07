@@ -7,8 +7,10 @@ const ActorCard = (props) => {
         </div>
       </div>
       <div className="flex-row justify-center text-center">
-        <div className="mt-1 text-m text-white">{props.actor.name}</div>
-        <div className="mt-1 text-xs text-gray-500">
+        <div className="mt-1 text-m text-white font-mono">
+          {props.actor.name}
+        </div>
+        <div className="mt-1 text-xs text-gray-500 font-mono">
           {props.actor.asCharacter}
         </div>
       </div>

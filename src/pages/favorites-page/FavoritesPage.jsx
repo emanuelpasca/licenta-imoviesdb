@@ -2,29 +2,11 @@ import { useEffect, useState } from "react";
 import MovieCard from "../../components/movie-card/MovieCard";
 import { whereQuery } from "../../configs/firebase/actions";
 import { useUserAuth } from "../../contexts/AuthContext";
+import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 import useUserDetails from "../../hooks/UserDetailsHook";
 
 const FavoritesPage = () => {
-  const { user } = useUserAuth();
-  const [userFavorites, setUserFavorites] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!user.uid) return;
-    whereQuery("favorites", "userId", user.uid).then((data) => {
-      if (!data) return;
-
-      setUserFavorites(data);
-      setLoading(false);
-    });
-  }, []);
-
-  if (loading)
-    return (
-      <div className="flex justify-center p-2">
-        <button className="btn btn-primary btn-circle loading border-transparent"></button>
-      </div>
-    );
+  const { userFavorites } = useUserFavorites();
 
   if (userFavorites.length === 0)
     return (

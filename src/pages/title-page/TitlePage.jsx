@@ -7,6 +7,7 @@ import useUserDetails from "../../hooks/UserDetailsHook";
 import { add, remove, whereQuery } from "../../configs/firebase/actions";
 import { PagePaths } from "../pages";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
+import { addToFavorites } from "../../configs/actions";
 
 const TitlePage = () => {
   const [loading, setLoading] = useState(true);
@@ -49,57 +50,18 @@ const TitlePage = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
-  // ADD TO FAVORITES HANDLER
-  const addToFavorites = () => {
+  const addToFavoritesHandler = () => {
     if (!user) {
       return navigate(PagePaths.LOGIN);
-    }
-
-    if (!isFavorite) {
-      add("favorites", {
-        userId: user.uid,
-        title: {
-          id: movie.id,
-          image: movie.image,
-          imDbRating: movie.imDbRating,
-          title: movie.title,
-          genreList: movie.genres,
-          keywords: movie.keywords,
-          plot: movie.plot,
-        },
-      });
-
-      setIsFavorite(true);
-
-      // UPDATE USER FAVORITES ARR
-      setUserFavorites((prev) => [
-        ...prev,
-        {
-          userId: user.uid,
-          title: {
-            id: movie.id,
-            image: movie.image,
-            imDbRating: movie.imDbRating,
-            title: movie.title,
-            genreList: movie.genres,
-            keywords: movie.keywords,
-            plot: movie.plot,
-          },
-        },
-      ]);
     } else {
-      whereQuery("favorites", "title.id", movie.id).then((result) => {
-        const [title] = result;
-        remove("favorites", title.id).then(() => {
-          setIsFavorite(false);
-          setUserFavorites((prev) => {
-            const newFavorites = prev.filter(
-              (item) => item.title.id != movie.id
-            );
-            return newFavorites;
-          });
-        });
-      });
+      addToFavorites(
+        user,
+        movie,
+        userFavorites,
+        setUserFavorites,
+        isFavorite,
+        setIsFavorite
+      );
     }
   };
 
@@ -117,26 +79,30 @@ const TitlePage = () => {
           <section className="flex flex-row justify-center p-1">
             {/* stanga */}
             <div className="basis-11/12">
-              <div className="text-4xl text-white">{movie.title}</div>
+              <div className="text-4xl text-white font-mono">{movie.title}</div>
               <div className="flex flex-row mt-3">
-                <div className="mr-1 text-gray-500">{movie.type},</div>
-                <div className="mr-1 text-gray-500">
+                <div className="mr-1 text-gray-500 font-mono">
+                  {movie.type},
+                </div>
+                <div className="mr-1 text-gray-500 font-mono">
                   {movie.year}
                   {movie.tvSeriesInfo ? `-${movie.tvSeriesInfo.yearEnd}` : ""},
                 </div>
-                <div className="mr-1 text-gray-500">{movie.contentRating}</div>
+                <div className="mr-1 text-gray-500 ">{movie.contentRating}</div>
               </div>
             </div>
             {/* dreapta */}
             <div className="flex flex-row ">
               <div>
-                <div className="text-l uppercase text-white mt-5">Rating</div>
+                <div className="text-l uppercase text-white mt-5 font-mono">
+                  Rating
+                </div>
                 <div className="">
                   <div>
                     <i className="fa-solid fa-star text-red-500"></i>
-                    <label className="ml-2">{movie.imDbRating}</label>
+                    <label className="ml-2 font-mono">{movie.imDbRating}</label>
                   </div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-gray-500 font-mono">
                     {movie.imDbRatingVotes} votes
                   </div>
                 </div>
@@ -145,10 +111,10 @@ const TitlePage = () => {
 
             <div className="flex flex-row ">
               <div>
-                <div className="text-l uppercase text-white mt-5">
+                <div className="text-l uppercase text-white mt-5 font-mono">
                   METACRITIC
                 </div>
-                <div className="text-center text-white">
+                <div className="text-center text-white font-mono">
                   <div>
                     <label
                       className={
@@ -198,7 +164,7 @@ const TitlePage = () => {
               <div>
                 <button
                   className="btn btn-secondary basis-2/6"
-                  onClick={addToFavorites}
+                  onClick={addToFavoritesHandler}
                 >
                   <i
                     className={
@@ -207,25 +173,31 @@ const TitlePage = () => {
                         : "fa-solid fa-heart "
                     }
                   ></i>
-                  <label className="ml-3">Add to favorites</label>
+                  <label className="ml-3 font-mono">Add to favorites</label>
                 </button>
               </div>
             </div>
-            <div className="mt-5 mb-5 max-w-4xl">
+            <div className="mt-5 mb-5 max-w-4xl font-mono">
               <label className="">{movie.plot}</label>
             </div>
             <hr className="color-red-500"></hr>
             <div className="mt-5 mb-5">
               <label className="text-red-700 mr-1 text-xl">|</label>
-              <label className="color-white text-xl">Director</label>
-              <label className="ml-5">{movie.directors}</label>
+              <label className="color-white text-xl font-mono">
+                {movie.type === "Movie" ? "Director" : "Creators"}
+              </label>
+              <label className="ml-5 font-mono">
+                {movie.type === "Movie"
+                  ? movie.directors
+                  : movie.tvSeriesInfo.creators}
+              </label>
             </div>
             <hr className="color-red-500"></hr>
           </section>
           <section>
             <div className="mt-5 mb-5">
               <label className="text-red-700 mr-1 text-xl">|</label>
-              <label className="color-white text-xl">Cast</label>
+              <label className="color-white text-xl font-mono">Cast</label>
 
               {/* <CastList cast={actorList.slice(0, 6)}></CastList> */}
               <CastRow cast={actorList}></CastRow>

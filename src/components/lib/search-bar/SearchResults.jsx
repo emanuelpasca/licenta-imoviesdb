@@ -41,7 +41,7 @@ const SearchResults = (props) => {
       {results.map((movie) => {
         return (
           <div onClick={onClickHandler}>
-            <MovieCard key={movie.id} movie={movie}></MovieCard>
+            <MovieCard key={movie.id} movie={movie} bySearch={true}></MovieCard>
           </div>
         );
       })}
