@@ -17,8 +17,6 @@ const CastRow = (props) => {
     const end = (page + 1) * 6; //20;
     setDisplayedActors(props.cast.slice(start, end));
     setPage(page + 1);
-    console.log(props.cast.length);
-    console.log((page - 1) * 6);
   };
 
   const previousPageClickHandler = () => {
