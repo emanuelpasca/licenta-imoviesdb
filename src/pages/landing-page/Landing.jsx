@@ -13,7 +13,6 @@ const Landing = () => {
         <img
           className="opacity-50 w-screen "
           src="src\assets\landingbg.png"
-          // src="https://images.unsplash.com/photo-1458053688450-eef5d21d43b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1473&q=80"
         ></img>
       </div>
       {/* <MoviesRow

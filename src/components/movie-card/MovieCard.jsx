@@ -1,13 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
+import ProgressiveImage from "../lib/ProgressiveImage";
 
 const MovieCard = (props) => {
   return (
     <div className="p-2 mt-2">
       <div className="card card-normal w-36 bg-secondary shadow-xl rounded-none">
         <Link to={`/title/${props.movie.id}`}>
-          <figure>
-            <img className="h-52 w-36" src={props.movie.image} alt="Shoes" />
-          </figure>
+          {/* <img className="h-52 w-36" src={props.movie.image} alt="image" /> */}
+          <ProgressiveImage
+            src={props.movie.image}
+            placeholder="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.drodd.com%2Fimages16%2Fdark-red8.jpg&f=1&nofb=1&ipt=30cec2f03096860e00f8170df486743b26704e4c911a3ad9042bfe3844e4f03e&ipo=images"
+            size="h-52 w-36"
+          ></ProgressiveImage>
         </Link>
         <div className="truncate overflow-hidden font-mono">
           <strong>{props.movie.title}</strong>
