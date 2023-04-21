@@ -40,11 +40,13 @@ const TitlePage = () => {
           .then((trailer) => setTrailer(trailer.linkEmbed));
 
         // CHECK IF TITLE IS FAVORITE
-        userFavorites.forEach((favorite) => {
-          if (favorite.title.id === movie.id) {
-            setIsFavorite(true);
-          }
-        });
+        if (user) {
+          userFavorites.forEach((favorite) => {
+            if (favorite.title.id === movie.id) {
+              setIsFavorite(true);
+            }
+          });
+        }
       })
       .catch((error) => console.log(error));
     window.scrollTo(0, 0);

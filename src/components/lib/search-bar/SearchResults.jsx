@@ -40,8 +40,8 @@ const SearchResults = (props) => {
     <div className="mt-10 h-screen w-64 right-96 bg-secondary overflow-y-scroll absolute">
       {results.map((movie) => {
         return (
-          <div onClick={onClickHandler}>
-            <MovieCard key={movie.id} movie={movie} bySearch={true}></MovieCard>
+          <div key={movie.id} onClick={onClickHandler}>
+            <MovieCard movie={movie} bySearch={true}></MovieCard>
           </div>
         );
       })}
