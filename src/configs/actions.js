@@ -37,6 +37,7 @@ export const addToFavorites = (
         genreList: movie.genres,
         keywords: movie.keywords,
         plot: movie.plot,
+        type: movie.type,
       },
     });
 
@@ -55,6 +56,7 @@ export const addToFavorites = (
           genreList: movie.genres,
           keywords: movie.keywords,
           plot: movie.plot,
+          type: movie.type,
         },
       },
     ]);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
-import "./ReviewForm.css";
+// import "./ReviewForm.css";
 
 const ReviewForm = (props) => {
   // props:  mode?: string;
@@ -38,8 +38,8 @@ const ReviewForm = (props) => {
     // };
 
     if (
-      target.userName.value == "" ||
-      target.review.value == "" ||
+      e.target.userName.value == "" ||
+      e.target.review.value == "" ||
       starValue == 0
     ) {
       alert("Please fill the form corecly!");
@@ -55,8 +55,8 @@ const ReviewForm = (props) => {
 
     props.onSubmit(reviewData);
 
-    target.userName.value = "";
-    target.review.value = "";
+    e.target.userName.value = "";
+    e.target.review.value = "";
     setStarValue(0);
   };
 

@@ -1,12 +1,24 @@
-import { useEffect, useState } from "react";
 import MovieCard from "../../components/movie-card/MovieCard";
-import { whereQuery } from "../../configs/firebase/actions";
-import { useUserAuth } from "../../contexts/AuthContext";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
-import useUserDetails from "../../hooks/UserDetailsHook";
+import axios from "axios";
 
 const FavoritesPage = () => {
   const { userFavorites } = useUserFavorites();
+
+  function fetchData() {
+    axios
+      .get("http://fd5b-35-185-48-17.ngrok.io")
+      .then((response) => {
+        console.log(response.data.recommendations);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function handleClick() {
+    fetchData();
+  }
 
   if (userFavorites.length === 0)
     return (
@@ -31,6 +43,9 @@ const FavoritesPage = () => {
             })}
           </div>
         </div>
+        <button className="btn btn-primary" onClick={handleClick}>
+          TEST REQUEST
+        </button>
       </div>
     </div>
   );

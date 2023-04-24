@@ -1,7 +1,7 @@
 import "./Review.css";
 import { FaStar } from "react-icons/fa";
-import useUserDetails from "../../../hooks/UserDetailsHook";
 import EditReview from "./edit-revieww/EditReview";
+import useUserDetails from "../../hooks/UserDetailsHook";
 
 const Review = (
   props

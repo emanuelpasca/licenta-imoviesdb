@@ -8,6 +8,7 @@ import { add, remove, whereQuery } from "../../configs/firebase/actions";
 import { PagePaths } from "../pages";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 import { addToFavorites } from "../../configs/actions";
+import ReviewsContainer from "../../components/reviews/ReviewContainer";
 
 const TitlePage = () => {
   const [loading, setLoading] = useState(true);
@@ -212,6 +213,7 @@ const TitlePage = () => {
               resultsPerPage={6}
             ></MoviesRow>
           </section>
+          <section>{/* <ReviewsContainer></ReviewsContainer> */}</section>
         </div>
       </div>
     </>
