@@ -1,18 +1,11 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
+import useToastify from "../../../hooks/ToastHook";
 // import "./ReviewForm.css";
 
 const ReviewForm = (props) => {
-  // props:  mode?: string;
-  // onSubmit: Function;
-  // review?: object;
-  // data?: {
-  //   id: string;
-  //   userName: string;
-  //   review: string;
-  //   stars: number;
-  // };
   const [starValue, setStarValue] = useState(0);
+  const notify = useToastify();
 
   let current = new Date();
   let cDate =
@@ -31,23 +24,18 @@ const ReviewForm = (props) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // const target = e.target as typeof e.target & {
-    //   [key: string]: {
-    //     value: string;
-    //   };
-    // };
 
     if (
-      e.target.userName.value == "" ||
+      e.target.title.value == "" ||
       e.target.review.value == "" ||
       starValue == 0
     ) {
-      alert("Please fill the form corecly!");
+      notify("warning", "You must fill the entire form!");
       return;
     }
 
     const reviewData = {
-      userName: e.target.userName.value,
+      title: e.target.title.value,
       review: e.target.review.value,
       stars: starValue,
       date: dateTime,
@@ -55,13 +43,13 @@ const ReviewForm = (props) => {
 
     props.onSubmit(reviewData);
 
-    e.target.userName.value = "";
+    e.target.title.value = "";
     e.target.review.value = "";
     setStarValue(0);
   };
 
   const starColors = {
-    orange: "#FFBA5A",
+    orange: "#b31b1b",
     grey: "#a9a9a9",
   };
 
@@ -72,51 +60,51 @@ const ReviewForm = (props) => {
   return (
     <>
       <form onSubmit={submitHandler}>
-        <h2>Tell us your oppinion!</h2>
-        <div className="container">
-          <div>
-            {/* <Input
-              label="Name"
-              type="text"
-              name="userName"
-              value={props.data?.userName || ""}
-            ></Input> */}
-            <input label="Name" type="text" name="userName">
-              {props.data.username || ""}
-            </input>
-            {/* <TextArea
-              label="Review"
-              name="review"
-              value={props.data?.review || ""}
-            ></TextArea> */}
-            <textarea label="Review" name="review">
-              {props.data.review || ""}
-            </textarea>
-            <div className="stars adica margin-top 20px">
-              {[...Array(5).keys()].map((index) => {
-                return (
-                  <FaStar
-                    key={index}
-                    size={24}
-                    style={{
-                      marginRight: 10,
-                      cursor: "pointer",
-                    }}
-                    color={
-                      starValue > index ? starColors.orange : starColors.grey
-                    }
-                    onClick={() => handleStarClick(index + 1)}
-                  ></FaStar>
-                );
-              })}
+        <div className=" w-full bg-secondary p-1 font-mono">
+          <h2 className="text-">Tell us your oppinion!</h2>
+          <div className="">
+            <div className="mt-1 flex flex-row">
+              <input
+                className="input input-primary bg-secondary"
+                label="Name"
+                type="text"
+                name="title"
+                placeholder={props.title || "Title"}
+              />
+              <div className="mt-3 ml-5 flex flex-row">
+                {[...Array(5).keys()].map((index) => {
+                  return (
+                    <FaStar
+                      key={index}
+                      size={22}
+                      style={{
+                        marginRight: 10,
+                        cursor: "pointer",
+                      }}
+                      color={
+                        starValue > index ? starColors.orange : starColors.grey
+                      }
+                      onClick={() => handleStarClick(index + 1)}
+                    ></FaStar>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="mt-2">
+              <textarea
+                className="textarea textarea-primary  w-full bg-secondary font-mono"
+                label="Review"
+                name="review"
+                placeholder={props.review || "Your review"}
+              />
             </div>
           </div>
           <br></br>
           <div className="flex">
             {props.mode === "edit" ? (
-              <button className="btn btn-grad">EDIT</button>
+              <button className="btn btn-primary">Edit</button>
             ) : (
-              <button className="btn btn-grad">SEND</button>
+              <button className="btn btn-primary">Send</button>
             )}
           </div>
         </div>

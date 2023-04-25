@@ -9,6 +9,7 @@ import { PagePaths } from "../pages";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 import { addToFavorites } from "../../configs/actions";
 import ReviewsContainer from "../../components/reviews/ReviewContainer";
+import ReviewForm from "../../components/reviews/add-review/ReviewForm";
 
 const TitlePage = () => {
   const [loading, setLoading] = useState(true);
@@ -39,7 +40,6 @@ const TitlePage = () => {
         fetch(`https://imdb-api.com/API/Trailer/k_435ffk04/${id}`)
           .then((res) => res.json())
           .then((trailer) => setTrailer(trailer.linkEmbed));
-
         // CHECK IF TITLE IS FAVORITE
         if (user) {
           userFavorites.forEach((favorite) => {
@@ -213,7 +213,13 @@ const TitlePage = () => {
               resultsPerPage={6}
             ></MoviesRow>
           </section>
-          <section>{/* <ReviewsContainer></ReviewsContainer> */}</section>
+          <section>
+            <div className="mt-5 mb-5">
+              <label className="text-red-700 mr-1 text-xl">|</label>
+              <label className="color-white text-2xl font-mono">Reviews</label>
+            </div>
+            <ReviewsContainer></ReviewsContainer>
+          </section>
         </div>
       </div>
     </>

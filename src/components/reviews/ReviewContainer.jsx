@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { whereQuery } from "../../configs/firebase/actions";
 import useUserDetails from "../../hooks/UserDetailsHook";
 import AddReview from "./add-review/AddReview";
+import { useUserAuth } from "../../contexts/AuthContext";
 
 const ReviewsContainer = () => {
   const [reviews, setReviews] = useState([]);
@@ -11,26 +12,26 @@ const ReviewsContainer = () => {
   const [userReviewed, setUserReviewed] = useState(false);
   const { id } = useParams();
 
-  const { getCurrentUserDetails } = useUserDetails();
-  const userId = getCurrentUserDetails().id;
-  // const userIsClient = getCurrentUserDetails().type === UserTypes.CLIENT;
+  const { user } = useUserAuth();
 
   useEffect(() => {
     if (id) {
       whereQuery("reviews", "movieId", id).then((receivedReviews) => {
         if (!receivedReviews) return;
 
-        receivedReviews.forEach((review) => {
-          review.userId === userId
-            ? setUserReviewed(true)
-            : setUserReviewed(false);
-        });
-
+        setUserReviewed(false);
         setReviews(receivedReviews);
         setLoading(false);
+        if (user) {
+          receivedReviews.forEach((review) => {
+            review.userId === user.uid
+              ? setUserReviewed(true)
+              : setUserReviewed(false);
+          });
+        }
       });
     }
-  }, []);
+  }, [id]);
 
   const onAddHandler = (data) => {
     setReviews((prevReviews) => {
@@ -65,14 +66,8 @@ const ReviewsContainer = () => {
     );
 
   return (
-    <div className="card">
-      {userReviewed ? (
-        <p>Thank you for your feedback!</p>
-      ) : (
-        <AddReview onAdd={onAddHandler}></AddReview>
-      )}
-      <hr></hr>
-      <h3>User reviews:</h3>
+    <div className="text-mono">
+      {userReviewed ? "" : <AddReview onAdd={onAddHandler}></AddReview>}
       {reviews.length == 0 && <p>No reviews found.</p>}
       {!loading && (
         <ReviewsList onEdit={onEditHandler} reviews={reviews}></ReviewsList>

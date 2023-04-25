@@ -10,15 +10,15 @@ const ReviewsList = (props) => {
     <div>
       {props.reviews.map((review) => {
         return (
-          <div className="items-container mt-10">
+          <div key={review.id} className="items-container mt-10">
             <Review
               onEdit={props.onEdit}
               id={review.id}
               review={review.review}
-              userName={review.userName}
+              title={review.title}
               stars={review.stars}
               date={review.date}
-              userEmail={review.userEmail}
+              userName={review.userName}
               userId={review.userId}
             ></Review>
           </div>

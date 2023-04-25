@@ -17,7 +17,7 @@ import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
   return (
-    <div className="app">
+    <div className="app font-mono">
       <UserAuthContextProvider>
         <UserFavoritesContextProvider>
           <BrowserRouter>

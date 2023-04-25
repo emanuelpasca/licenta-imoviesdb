@@ -1,18 +1,15 @@
 .review-box-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* flex-wrap: wrap; */
+  /* width: 100%; */
 }
 
 .review-box {
-  width: 700px;
   box-shadow: 2px 2px 30px rgba(0, 0 0 0.1);
-  background-color: white;
   padding: 20px;
-  margin: 15px;
-  box-shadow: 3px 3px 5px rgb(0 0 0 / 20%);
+  margin: 5px;
 }
 
 .profile-img {
