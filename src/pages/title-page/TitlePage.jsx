@@ -31,7 +31,6 @@ const TitlePage = () => {
     fetch(`https://imdb-api.com/en/API/Title/k_435ffk04/${id}`)
       .then((res) => res.json())
       .then((movie) => {
-        console.log(movie);
         setMovie(movie);
         setGenreList(movie.genreList);
         setActorList(movie.actorList);
