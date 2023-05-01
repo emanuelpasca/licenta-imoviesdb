@@ -38,6 +38,8 @@ export const addToFavorites = (
         keywords: movie.keywords,
         plot: movie.plot,
         type: movie.type,
+        contentRating: movie.contentRating,
+        year: movie.year,
       },
     });
 
@@ -57,6 +59,8 @@ export const addToFavorites = (
           keywords: movie.keywords,
           plot: movie.plot,
           type: movie.type,
+          contentRating: movie.contentRating,
+          year: movie.year,
         },
       },
     ]);

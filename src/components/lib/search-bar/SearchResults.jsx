@@ -37,7 +37,7 @@ const SearchResults = (props) => {
     );
 
   return (
-    <div className="mt-10 h-screen w-64 right-96 bg-secondary overflow-y-scroll absolute">
+    <div className="mt-10 h-screen w-96 bg-secondary overflow-y-scroll absolute">
       {results.map((movie) => {
         return (
           <div key={movie.id} onClick={onClickHandler}>

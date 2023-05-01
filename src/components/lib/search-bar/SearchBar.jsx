@@ -18,7 +18,7 @@ const SearchBar = () => {
         type="text"
         name="input"
         placeholder="Search"
-        className="input input-xs bg-accent font-mono"
+        className="input input-xs bg-accent font-mono w-96"
       />
       {userInput != "" && (
         <SearchResults

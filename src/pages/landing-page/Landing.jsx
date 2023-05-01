@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import MoviesRow from "../../components/movie-card/MoviesRow";
+import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 
 const Landing = () => {
   return (

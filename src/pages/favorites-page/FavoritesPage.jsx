@@ -7,7 +7,7 @@ const FavoritesPage = () => {
 
   function fetchData() {
     axios
-      .get("http://fd5b-35-185-48-17.ngrok.io")
+      .get("http://6d2e-35-227-116-62.ngrok.io")
       .then((response) => {
         console.log(response.data.recommendations);
       })
@@ -28,17 +28,37 @@ const FavoritesPage = () => {
     );
 
   return (
-    <div className="flex justify-center">
+    <div className="flex ml-32">
       <div>
         <div className="p-1 flex text-xl">
           <div className="text-red-700">|</div>
-          <div className="mx-1 text-2xl">Favorites</div>
+          <div className="mx-1 text-2xl">Your favorites</div>
         </div>
         <div className="flex">
-          <div className="grid grid-cols-10">
+          {/* <div className="grid grid-cols-10"> */}
+          <div className="">
             {userFavorites.map((favorite) => {
               return (
-                <MovieCard key={favorite.id} movie={favorite.title}></MovieCard>
+                <div className="flex">
+                  <div className="">
+                    <MovieCard
+                      key={favorite.id}
+                      movie={favorite.title}
+                    ></MovieCard>
+                  </div>
+                  <div className="mt-3 w-3/4">
+                    <div className="text-xl">{favorite.title.title}</div>
+                    <div className="text-gray-500 mt-2">
+                      {favorite.title.type}, {favorite.title.year}
+                    </div>
+                    <div className="text-gray-500 mt-1">
+                      {favorite.title.genreList}
+                    </div>
+                    <div className=" overflow-x-clip mt-1 max-w-8xl">
+                      {favorite.title.plot}
+                    </div>
+                  </div>
+                </div>
               );
             })}
           </div>
