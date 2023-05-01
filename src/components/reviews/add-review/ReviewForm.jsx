@@ -62,10 +62,10 @@ const ReviewForm = (props) => {
       <form onSubmit={submitHandler}>
         <div className=" w-full bg-secondary p-1 font-mono">
           <h2 className="text-">Tell us your oppinion!</h2>
-          <div className="">
+          <div className="mt-5">
             <div className="mt-1 flex flex-row">
               <input
-                className="input input-primary bg-secondary"
+                className="input input-secondary bg-secondary border-b-primary"
                 label="Name"
                 type="text"
                 name="title"
@@ -92,7 +92,7 @@ const ReviewForm = (props) => {
             </div>
             <div className="mt-2">
               <textarea
-                className="textarea textarea-primary  w-full bg-secondary font-mono"
+                className="textarea textarea-secondary  w-full bg-secondary border-b-primary"
                 label="Review"
                 name="review"
                 placeholder={props.review || "Your review"}
