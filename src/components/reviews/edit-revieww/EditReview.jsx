@@ -33,6 +33,7 @@ const EditReview = (props) => {
           mode="edit"
           id={props.id}
           userName={props.userName}
+          title={props.title}
           review={props.review}
           stars={props.stars}
           onSubmit={editReview}

@@ -65,11 +65,11 @@ const ReviewForm = (props) => {
           <div className="mt-5">
             <div className="mt-1 flex flex-row">
               <input
-                className="input input-secondary bg-secondary border-b-primary"
+                className="input input-secondary bg-secondary border-b-primary text-white"
                 label="Name"
                 type="text"
                 name="title"
-                placeholder={props.title || "Title"}
+                value={props.title || "Title"}
               />
               <div className="mt-3 ml-5 flex flex-row">
                 {[...Array(5).keys()].map((index) => {
@@ -92,10 +92,10 @@ const ReviewForm = (props) => {
             </div>
             <div className="mt-2">
               <textarea
-                className="textarea textarea-secondary  w-full bg-secondary border-b-primary"
+                className="textarea textarea-secondary  w-full bg-secondary border-b-primary  text-white"
                 label="Review"
                 name="review"
-                placeholder={props.review || "Your review"}
+                value={props.review || "Your review"}
               />
             </div>
           </div>

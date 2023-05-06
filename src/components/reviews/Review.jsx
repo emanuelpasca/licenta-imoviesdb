@@ -55,6 +55,7 @@ const Review = (
         </div>
         <div className="flex flex-row justify-between">
           <div className="font-mono">
+            <p className=" font-bold mb-5">{props.title}</p>
             <p>{props.review}</p>
           </div>
           <div className="flex">
@@ -63,6 +64,7 @@ const Review = (
                 onEdit={props.onEdit}
                 id={props.id}
                 userName={props.userName}
+                title={props.title}
                 review={props.review}
                 stars={props.stars}
               ></EditReview>

@@ -14,7 +14,7 @@ const MovieCard = (props) => {
           ></ProgressiveImage>
         </Link>
         <div className="truncate overflow-hidden font-mono">
-          <strong>{props.movie.title}</strong>
+          {!props.bySearch && <strong>{props.movie.title}</strong>}
         </div>
         <div className="p-1">
           {!props.bySearch && (
