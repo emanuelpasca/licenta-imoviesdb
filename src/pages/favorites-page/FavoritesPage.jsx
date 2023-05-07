@@ -1,23 +1,34 @@
 import MovieCard from "../../components/movie-card/MovieCard";
+import { getRecommendations } from "../../configs/actions";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 import axios from "axios";
 
 const FavoritesPage = () => {
   const { userFavorites } = useUserFavorites();
 
-  function fetchData() {
-    axios
-      .get("http://6d2e-35-227-116-62.ngrok.io")
-      .then((response) => {
-        console.log(response.data.recommendations);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  // function fetchData() {
+  //   axios
+  //     .post("http://127.0.0.1:5000/", {
+  //       keywords: ["cacat", "pisat", "gunfight", "shootout", "gun-battle"],
+  //     })
+  //     .then((response) => {
+  //       console.log(response.data.recommendations);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }
 
   function handleClick() {
-    fetchData();
+    getRecommendations(
+      userFavorites[0].title.keywords.replaceAll(" ", "-").split(",")
+    )
+      .then((recommendations) => {
+        console.log(recommendations);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   if (userFavorites.length === 0)

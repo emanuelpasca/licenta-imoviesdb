@@ -1,6 +1,7 @@
-import { API_KEY } from "./config";
+import { API_KEY, RECOMMENDATIONS_API } from "./config";
 // import { add, remove, whereQuery } from "../../configs/firebase/actions";
 import { add, remove, whereQuery } from "./firebase/actions";
+import axios from "axios";
 
 const useFetchMovies = () => {
   const AJAX = async (type) => {
@@ -76,4 +77,14 @@ export const addToFavorites = (
       });
     });
   }
+};
+
+export const getRecommendations = (keywords) => {
+  return axios
+    .post(`${RECOMMENDATIONS_API}`, {
+      keywords: keywords,
+    })
+    .then((res) => {
+      return res.data.recommendations;
+    });
 };
