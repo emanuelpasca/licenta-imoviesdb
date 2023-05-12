@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import MoviesRow from "../../components/movie-card/MoviesRow";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
+import RecommendationRow from "../../components/recommendation/RecommendationRow";
 
 const Landing = () => {
   return (
@@ -37,6 +38,7 @@ const Landing = () => {
         withFetch={true}
         description={"Most Popular TVs"}
       ></MoviesRow>
+      <RecommendationRow></RecommendationRow>
       {/* <MoviesRow
         resultsPerPage={10}
         withFetch={true}
