@@ -40,6 +40,10 @@ const RecommendationRow = () => {
     }
   }, []);
 
+  if (!userFavorites) {
+    return null;
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center p-2">
