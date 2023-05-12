@@ -3,6 +3,7 @@ import { useUserAuth } from "../../contexts/AuthContext";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 import { getRecommendations } from "../../configs/actions";
 import MoviesRow from "../movie-card/MoviesRow";
+import { API_KEY } from "../../configs/config";
 
 const RecommendationRow = () => {
   const { user } = useUserAuth();
@@ -14,11 +15,16 @@ const RecommendationRow = () => {
     if (userFavorites) {
       async function fetchMovieDetails(imdbId) {
         const response = await fetch(
-          `https://imdb-api.com/en/API/Title/k_435ffk04/${imdbId}`
+          `https://imdb-api.com/en/API/Title/${API_KEY}/${imdbId}`
         );
         const movieDetails = await response.json();
         return movieDetails;
       }
+
+      const randomFavoriteMovie = Math.floor(
+        Math.random() * userFavorites.length
+      );
+
       async function fetchRecommendedMovies() {
         const recommendedMoviesArray = await getRecommendations(
           userFavorites[4].title.keywords.replaceAll(" ", "-").split(",")
