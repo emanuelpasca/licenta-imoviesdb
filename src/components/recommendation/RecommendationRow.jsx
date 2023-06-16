@@ -12,7 +12,7 @@ const RecommendationRow = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (userFavorites) {
+    if (!userFavorites || userFavorites.length !== 0) {
       async function fetchMovieDetails(imdbId) {
         const response = await fetch(
           `https://imdb-api.com/en/API/Title/${API_KEY}/${imdbId}`
@@ -27,7 +27,9 @@ const RecommendationRow = () => {
 
       async function fetchRecommendedMovies() {
         const recommendedMoviesArray = await getRecommendations(
-          userFavorites[4].title.keywords.replaceAll(" ", "-").split(",")
+          userFavorites[randomFavoriteMovie].title.keywords
+            .replaceAll(" ", "-")
+            .split(",")
         );
         const movieDetailsArray = await Promise.all(
           recommendedMoviesArray.map((imdbId) => fetchMovieDetails(imdbId))
@@ -40,7 +42,7 @@ const RecommendationRow = () => {
     }
   }, []);
 
-  if (!userFavorites) {
+  if (!userFavorites || userFavorites.length === 0) {
     return null;
   }
 
@@ -56,7 +58,7 @@ const RecommendationRow = () => {
     <div>
       {user ? (
         <MoviesRow
-          description={"Recommended based on your favorites"}
+          description={`Recommended based on your favorites`}
           movies={recommendedMovies}
           resultsPerPage={10}
         ></MoviesRow>

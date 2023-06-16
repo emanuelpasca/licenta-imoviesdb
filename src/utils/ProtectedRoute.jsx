@@ -5,11 +5,7 @@ import useUserDetails from "../hooks/UserDetailsHook";
 import { PagePaths } from "../pages/pages";
 
 const ProtectedRoute = ({ children }) => {
-  const { getCurrentUserDetails } = useUserDetails();
   const { user: userAuthData } = useUserAuth();
-  const userDetails = getCurrentUserDetails();
-
-  // if (userAuthData) return <div>Loading...</div>;
 
   if (userAuthData) return <Fragment>{children}</Fragment>;
 

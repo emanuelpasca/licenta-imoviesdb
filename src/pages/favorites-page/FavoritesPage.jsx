@@ -52,7 +52,10 @@ const FavoritesPage = () => {
               return (
                 <div className="flex" key={favorite.id}>
                   <div className="">
-                    <MovieCard movie={favorite.title}></MovieCard>
+                    <MovieCard
+                      key={favorite.id}
+                      movie={favorite.title}
+                    ></MovieCard>
                   </div>
                   <div className="mt-3 w-3/4">
                     <div className="text-xl">{favorite.title.title}</div>
