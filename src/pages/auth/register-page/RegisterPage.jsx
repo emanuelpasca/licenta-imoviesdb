@@ -31,7 +31,7 @@ const RegisterPage = () => {
       await signUp(email, password, username);
 
       notify("success", "Register succesfully");
-      navigate(PagePaths.LOGIN);
+      // navigate(PagePaths.LOGIN);
     } catch (err) {
       notify("error", `${err}`);
     }

@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import MoviesRow from "../../components/movie-card/MoviesRow";
 import { useUserFavorites } from "../../contexts/UserFavoritesContext";
 import RecommendationRow from "../../components/recommendation/RecommendationRow";
+import { useUserAuth } from "../../contexts/AuthContext";
 
 const Landing = () => {
+  const { user } = useUserAuth();
   return (
     <div className="">
       <div className="flex justify-center h-96 mb-28">
@@ -38,7 +40,7 @@ const Landing = () => {
         withFetch={true}
         description={"Most Popular TVs"}
       ></MoviesRow>
-      <RecommendationRow></RecommendationRow>
+      {user ? <RecommendationRow></RecommendationRow> : ""}
       {/* <MoviesRow
         resultsPerPage={10}
         withFetch={true}

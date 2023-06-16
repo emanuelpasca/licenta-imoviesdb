@@ -12,7 +12,7 @@ const RecommendationRow = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!userFavorites || userFavorites.length !== 0) {
+    if (userFavorites !== null && userFavorites.length !== 0) {
       async function fetchMovieDetails(imdbId) {
         const response = await fetch(
           `https://imdb-api.com/en/API/Title/${API_KEY}/${imdbId}`

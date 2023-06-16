@@ -69,7 +69,7 @@ const ReviewForm = (props) => {
                 label="Name"
                 type="text"
                 name="title"
-                value={props.title || "Title"}
+                placeholder={props.title || "Title"}
               />
               <div className="mt-3 ml-5 flex flex-row">
                 {[...Array(5).keys()].map((index) => {
@@ -95,7 +95,7 @@ const ReviewForm = (props) => {
                 className="textarea textarea-secondary  w-full bg-secondary border-b-primary  text-white"
                 label="Review"
                 name="review"
-                value={props.review || "Your review"}
+                placeholder={props.review || "Your review"}
               />
             </div>
           </div>

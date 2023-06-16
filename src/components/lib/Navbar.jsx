@@ -14,7 +14,9 @@ const Navbar = () => {
       await logOut();
       notify("success", "Logged out successfully");
       localStorage.setItem("userData", "");
-      navigate(PagePaths.LANDING);
+      setTimeout(() => {
+        navigate(PagePaths.LANDING);
+      }, 2000);
       // window.location.reload();
     } catch (err) {
       notify("error", `${err}`);
