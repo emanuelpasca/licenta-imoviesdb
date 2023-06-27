@@ -1,4 +1,8 @@
-import { API_KEY, RECOMMENDATIONS_API } from "./config";
+import {
+  API_KEY,
+  MOVIES_RECOMMENDATIONS_API,
+  TVSERIES_RECOMMENDATIONS_API,
+} from "./config";
 // import { add, remove, whereQuery } from "../../configs/firebase/actions";
 import { add, remove, whereQuery } from "./firebase/actions";
 import axios from "axios";
@@ -79,11 +83,18 @@ export const addToFavorites = (
   }
 };
 
-export const getRecommendations = (keywords) => {
+export const getRecommendations = (keywords, type) => {
   return axios
-    .post(`${RECOMMENDATIONS_API}`, {
-      keywords: keywords,
-    })
+    .post(
+      `${
+        type === "Movie"
+          ? MOVIES_RECOMMENDATIONS_API
+          : TVSERIES_RECOMMENDATIONS_API
+      }`,
+      {
+        keywords: keywords,
+      }
+    )
     .then((res) => {
       return res.data.recommendations;
     });

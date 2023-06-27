@@ -29,7 +29,8 @@ const RecommendationRow = () => {
         const recommendedMoviesArray = await getRecommendations(
           userFavorites[randomFavoriteMovie].title.keywords
             .replaceAll(" ", "-")
-            .split(",")
+            .split(","),
+          userFavorites[randomFavoriteMovie].title.type
         );
         const movieDetailsArray = await Promise.all(
           recommendedMoviesArray.map((imdbId) => fetchMovieDetails(imdbId))
