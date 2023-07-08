@@ -4,4 +4,5 @@ export const PagePaths = {
   LOGIN: "/login",
   REGISTER: "/register",
   FAVORITES: "/favorites",
+  TOP_TITLES: "/top/:query",
 };

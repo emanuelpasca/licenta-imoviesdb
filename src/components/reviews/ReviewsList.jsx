@@ -12,6 +12,7 @@ const ReviewsList = (props) => {
         return (
           <div key={review.id} className="items-container mt-10">
             <Review
+              key={review.id}
               onEdit={props.onEdit}
               id={review.id}
               review={review.review}

@@ -14,6 +14,7 @@ import { UserAuthContextProvider } from "./contexts/AuthContext";
 import { UserFavoritesContextProvider } from "./contexts/UserFavoritesContext";
 import FavoritesPage from "./pages/favorites-page/FavoritesPage";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import TopTitlesPage from "./pages/top-titles-page/TopTitlesPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path={PagePaths.TOP_TITLES} element={<TopTitlesPage />} />
             </Routes>
             <Footer></Footer>
           </BrowserRouter>

@@ -34,7 +34,49 @@ const Navbar = () => {
       </div>
       <div className="flex-none gap-5">
         <div className="form-control">
-          <SearchBar></SearchBar>
+          <div className="flex flex-row">
+            <div className="dropdown dropdown-hover dropdown-end">
+              <label tabIndex={0} className="cursor-pointer">
+                <i className="fa-sharp fa-solid fa-bars mr-3"></i>
+              </label>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-secondary rounded-box w-60"
+              >
+                <Link to={"/top/Top250Movies"}>
+                  <li>
+                    <a>Top 250 Movies</a>
+                  </li>
+                </Link>
+                <Link to={"/top/Top250TVs"}>
+                  <li>
+                    <a>Top 250 TVs</a>
+                  </li>
+                </Link>
+                <Link to={"/top/MostPopularMovies"}>
+                  <li>
+                    <a>Most Popular Movies</a>
+                  </li>
+                </Link>
+                <Link to={"/top/MostPopularTVs"}>
+                  <li>
+                    <a>Most Popular TVs</a>
+                  </li>
+                </Link>
+                <Link to={"/top/InTheaters"}>
+                  <li>
+                    <a>In Theaters</a>
+                  </li>
+                </Link>
+                <Link to={"/top/ComingSoon"}>
+                  <li>
+                    <a>Coming Soon</a>
+                  </li>
+                </Link>
+              </ul>
+            </div>
+            <SearchBar></SearchBar>
+          </div>
         </div>
         <div>
           <i className="fa-solid fa-heart"></i>
@@ -48,12 +90,6 @@ const Navbar = () => {
           <i className="fa-solid fa-user"></i>
           <button className="btn btn-secondary rounded-full font-mono">
             Actors
-          </button>
-        </div>
-        <div>
-          <i className="fa-solid fa-bookmark"></i>
-          <button className="btn btn-secondary rounded-full font-mono">
-            Watchlist
           </button>
         </div>
         <div className="dropdown dropdown-end">

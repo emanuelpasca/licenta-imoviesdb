@@ -2,9 +2,9 @@ import ProgressiveImage from "../lib/ProgressiveImage";
 
 const ActorCard = (props) => {
   return (
-    <div className="border-solid  bg-secondary w-36 h-52 mt-2 ml-2 rounded">
+    <div className="border-solid bg-secondary w-36 h-72 mt-2 ml-3">
       <div className="avatar">
-        <div className="w-36 h-32">
+        <div className="w-36 h-52">
           {/* <img src={props.actor.image} /> */}
           <ProgressiveImage
             src={props.actor.image}

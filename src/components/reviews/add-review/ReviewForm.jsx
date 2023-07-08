@@ -72,7 +72,7 @@ const ReviewForm = (props) => {
                 placeholder={props.title || "Title"}
               />
               <div className="mt-3 ml-5 flex flex-row">
-                {[...Array(5).keys()].map((index) => {
+                {[...Array(10).keys()].map((index) => {
                   return (
                     <FaStar
                       key={index}
